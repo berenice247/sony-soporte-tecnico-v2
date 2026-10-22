@@ -34,6 +34,18 @@ Antes de usarlo en producción, implementa un backend, base de datos, contraseñ
 - `admin.html`: panel de administración
 - `css/style.css`: estilos
 - `js/`: lógica de autenticación, datos de prueba y paneles
+- `database/sony_soporte_corregido.sql`: esquema PostgreSQL con datos de prueba
+
+## Base de datos
+
+El script `database/sony_soporte_corregido.sql` crea el esquema PostgreSQL (usuarios, productos, tickets, evidencias, diagnósticos, historial de estados y notificaciones), sus triggers y datos de prueba ficticios.
+
+**Atención:** el script empieza con `DROP SCHEMA IF EXISTS public CASCADE;`, por lo que borra todo lo que haya en el esquema `public`. Ejecútalo solo sobre una base de datos vacía o de pruebas:
+
+```bash
+createdb sony_soporte
+psql -d sony_soporte -f database/sony_soporte_corregido.sql
+```
 
 ## Licencia
 
