@@ -47,6 +47,20 @@ createdb sony_soporte
 psql -d sony_soporte -f database/sony_soporte_corregido.sql
 ```
 
+### Despliegue en Railway
+
+1. En [railway.com](https://railway.com) crea un proyecto y añade **Database → PostgreSQL**.
+2. En el servicio Postgres, pestaña **Variables**, copia `DATABASE_PUBLIC_URL`.
+3. Copia `.env.example` como `.env` y pega esa URL en `DATABASE_URL` (el archivo `.env` no se sube a GitHub).
+4. Instala dependencias y carga el esquema:
+
+```bash
+npm install
+npm run db:init -- --confirmar
+```
+
+Usuarios de prueba: los clientes usan la contraseña `cliente123`, los técnicos `tecnico123` y el administrador `admin123` (guardadas como hash bcrypt).
+
 ## Licencia
 
 Consulta `LICENSE.txt`. Verifica que la licencia sea adecuada para todos los componentes y contenidos que decidas distribuir.

@@ -1,0 +1,31 @@
+{
+  "name": "sony-soporte-tecnico",
+  "version": "1.0.0",
+  "description": "Sistema de soporte tecnico Sony",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "db:init": "node database/init-db.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CahuanaSnayder/sony-soporte-tecnico.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/CahuanaSnayder/sony-soporte-tecnico/issues"
+  },
+  "homepage": "https://github.com/CahuanaSnayder/sony-soporte-tecnico#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0",
+    "pg": "^8.23.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

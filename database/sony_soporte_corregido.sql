@@ -168,12 +168,13 @@ CREATE TRIGGER trg_tickets_estado_inicial
     FOR EACH ROW EXECUTE FUNCTION fn_tickets_estado_inicial();
 
 -- 10. DATOS DE PRUEBA
+-- Contraseñas de prueba (bcrypt, coste 12): clientes = cliente123, técnicos = tecnico123, administrador = admin123
 INSERT INTO usuarios (rol, nombres, apellidos, dni, correo, celular, password_hash) VALUES
-('cliente',       'Lucía',   'Ramos',   '71234567', 'lucia.ramos@mail.com',    '987654321', '$2b$12$hashPass1'),
-('tecnico',       'Marco',   'Delgado', '72345678', 'marco.delgado@sony.com',  '987654322', '$2b$12$hashPass2'),
-('administrador', 'Paula',   'Núñez',   '73456789', 'paula.nunez@sony.com',    '987654323', '$2b$12$hashPass3'),
-('cliente',       'Carlos',  'Mendoza', '74561234', 'carlos.mendoza@gmail.com','951234567', '$2b$12$hashPass4'),
-('tecnico',       'Jorge',   'Campos',  '73112233', 'jorge.campos@sony.com',   '945678123', '$2b$12$hashPass5');
+('cliente',       'Lucía',   'Ramos',   '71234567', 'lucia.ramos@mail.com',    '987654321', '$2b$12$F43rjJifcIW5.r10l22sruEFNkIQBovnwgOTgVqa0nqW8OGwQLvZy'),
+('tecnico',       'Marco',   'Delgado', '72345678', 'marco.delgado@sony.com',  '987654322', '$2b$12$bl9LOBd62TFjonw36YjVH.rjB8Pi6UV6JjQ.zcjBhoO2.RwTiBiO2'),
+('administrador', 'Paula',   'Núñez',   '73456789', 'paula.nunez@sony.com',    '987654323', '$2b$12$boeqZnVylOIWTwFTp3y6b.fSprJkN4ayXl6dgvRipKvBlre/O91dO'),
+('cliente',       'Carlos',  'Mendoza', '74561234', 'carlos.mendoza@gmail.com','951234567', '$2b$12$F43rjJifcIW5.r10l22sruEFNkIQBovnwgOTgVqa0nqW8OGwQLvZy'),
+('tecnico',       'Jorge',   'Campos',  '73112233', 'jorge.campos@sony.com',   '945678123', '$2b$12$bl9LOBd62TFjonw36YjVH.rjB8Pi6UV6JjQ.zcjBhoO2.RwTiBiO2');
 
 INSERT INTO productos (nombre, categoria, modelo, descripcion) VALUES
 ('PlayStation 5 Slim',         'Consola',     'CFI-2016A',   'Consola de videojuegos PS5'),
