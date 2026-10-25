@@ -24,7 +24,7 @@ async function main() {
     ssl: esLocal ? false : { rejectUnauthorized: false },
   });
 
-  const sql = fs.readFileSync(path.join(__dirname, 'sony_soporte_corregido.sql'), 'utf8');
+  const sql = fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf8');
 
   await client.connect();
   try {
@@ -42,6 +42,7 @@ async function main() {
     UNION ALL SELECT 'tickets', count(*)::int FROM tickets
     UNION ALL SELECT 'evidencias', count(*)::int FROM evidencias
     UNION ALL SELECT 'diagnosticos', count(*)::int FROM diagnosticos
+    UNION ALL SELECT 'mensajes', count(*)::int FROM mensajes
     UNION ALL SELECT 'historial_estados', count(*)::int FROM historial_estados
     UNION ALL SELECT 'notificaciones', count(*)::int FROM notificaciones
   `);

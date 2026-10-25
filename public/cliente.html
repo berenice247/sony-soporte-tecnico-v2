@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111318">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="/css/app.css">
+  <script src="/js/tema.js"></script>
+  <script src="/js/theme.js"></script>
+  <title>Portal del cliente · Sony Soporte Técnico</title>
+</head>
+<body class="min-h-screen">
+
+<header class="topbar">
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+    <p class="text-xl font-extrabold tracking-[0.25em] text-sony">SONY <span class="ml-1 text-xs font-medium tracking-normal text-slate-400">Portal del cliente</span></p>
+    <div class="flex items-center gap-3">
+      <div class="relative">
+        <button type="button" id="btnCampana" class="tema-btn" aria-haspopup="true" aria-expanded="false" aria-label="Notificaciones">🔔 <span id="contadorNotif" class="hidden rounded-full bg-sony px-1.5 text-[10px]">0</span></button>
+        <div id="panelNotif" class="panel-flotante hidden" aria-label="Notificaciones"></div>
+      </div>
+      <span class="hidden text-sm text-slate-300 sm:inline" data-nombre-usuario></span>
+      <a href="https://www.sony.com.pe/" target="_blank" rel="noopener noreferrer" class="hidden text-xs text-slate-400 hover:text-white md:inline">Productos Sony ↗</a>
+      <button type="button" data-cerrar-sesion class="btn-sm rounded-lg bg-white/10 px-3 py-1.5 text-xs font-semibold hover:bg-white/20">Cerrar sesión</button>
+    </div>
+  </div>
+</header>
+
+<main class="page">
+
+  <!-- Nueva solicitud -->
+  <section class="lg:col-span-1">
+    <div class="card-pad lg:sticky lg:top-20">
+      <h1 class="section-title">Nueva solicitud de servicio</h1>
+      <p class="section-sub">Cuéntanos qué le pasa a tu equipo. Ten a la mano tu boleta.</p>
+
+      <form id="ticketForm" class="mt-5 space-y-4">
+        <div>
+          <label for="productoId" class="field-label">Producto Sony</label>
+          <select id="productoId" required class="input"><option value="">Cargando catálogo…</option></select>
+        </div>
+        <div id="bloqueOtro" class="hidden space-y-4 rounded-xl bg-slate-50 p-3 ring-1 ring-line">
+          <div>
+            <label for="producto" class="field-label">Nombre del producto</label>
+            <input id="producto" type="text" minlength="2" maxlength="150" class="input" placeholder="Ej. Walkman NW-A306">
+          </div>
+          <div>
+            <label for="categoria" class="field-label">Categoría</label>
+            <select id="categoria" class="input">
+              <option value="Consolas / Gaming">Gaming / PlayStation</option>
+              <option value="Televisores">TV y video</option>
+              <option value="Audio">Audio y sonido</option>
+              <option value="Fotografía">Cámaras / fotografía</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="categoria" class="field-label">Categoría</label>
+          <select id="categoria" required class="input">
+            <option value="Consolas / Gaming">Gaming / PlayStation</option>
+            <option value="Televisores">TV y video</option>
+            <option value="Audio">Audio y sonido</option>
+            <option value="Fotografía">Cámaras / fotografía</option>
+          </select>
+        </div>
+        <div>
+          <label for="numeroSerie" class="field-label">N° de serie</label>
+          <input id="numeroSerie" type="text" required minlength="4" maxlength="50" pattern="[A-Za-z0-9][A-Za-z0-9_\/\-]*" class="input" placeholder="SN-123456">
+          <p class="field-hint">Está en la etiqueta o código de barras del equipo.</p>
+        </div>
+
+        <fieldset class="grid grid-cols-2 gap-3 rounded-xl bg-slate-50 p-3 ring-1 ring-slate-200">
+          <legend class="sr-only">Datos de la boleta</legend>
+          <div>
+            <label for="numeroBoleta" class="field-label">N° de boleta</label>
+            <input id="numeroBoleta" type="text" required maxlength="20" pattern="[A-Za-z0-9]{1,6}-[0-9]{1,10}" title="Formato: B001-1234" class="input" placeholder="B001-1234">
+          </div>
+          <div>
+            <label for="fechaCompra" class="field-label">Fecha de compra</label>
+            <input id="fechaCompra" type="date" required class="input">
+          </div>
+        </fieldset>
+
+        <div>
+          <label for="descripcionFalla" class="field-label">Descripción de la falla</label>
+          <textarea id="descripcionFalla" rows="4" required minlength="10" maxlength="2000" class="input" placeholder="¿Qué sucede? ¿Desde cuándo? ¿Qué intentaste?"></textarea>
+          <p class="field-hint text-right"><span id="contador">0</span>/2000</p>
+        </div>
+
+        <div>
+          <label for="fotoEvidencia" class="field-label">Foto del daño (opcional)</label>
+          <input id="fotoEvidencia" type="file" accept="image/jpeg,image/png,image/webp"
+                 class="block w-full text-xs text-slate-600 file:mr-3 file:rounded-lg file:border-0 file:bg-slate-100 file:px-3 file:py-2 file:text-xs file:font-semibold hover:file:bg-slate-200">
+          <img id="vistaPrevia" alt="Vista previa de la foto" class="mt-2 hidden h-28 rounded-lg object-cover ring-1 ring-slate-200">
+          <p class="field-hint">Se reduce automáticamente para que suba rápido.</p>
+        </div>
+
+        <div class="notice-warn text-xs">
+          <strong>Dos evaluaciones:</strong> primero validamos tu boleta y garantía; luego un técnico evalúa la falla.
+        </div>
+
+        <p id="errorForm" class="hidden text-sm font-medium text-red-600" role="alert"></p>
+        <button type="submit" class="btn-primary w-full py-2.5">Enviar solicitud</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Mis tickets -->
+  <section class="lg:col-span-2">
+    <div class="mb-4 flex items-end justify-between">
+      <div>
+        <h2 class="section-title">Mis solicitudes</h2>
+        <p class="section-sub" id="resumen">Cargando…</p>
+      </div>
+    </div>
+    <div id="chipsEstado" class="mb-5 flex flex-wrap gap-2" role="group" aria-label="Filtrar solicitudes"></div>
+    <div id="listaTickets" class="space-y-8" aria-live="polite">
+      <div class="skeleton h-48"></div>
+      <div class="skeleton h-48"></div>
+    </div>
+  </section>
+</main>
+
+<script src="/js/common.js"></script>
+<script src="/js/cliente.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111318">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="stylesheet" href="/css/app.css">
+
+  <script src="/js/theme.js"></script>
+  <title>Acceso · Sony Soporte Técnico</title>
+</head>
+<body class="min-h-screen bg-ink">
+<main class="grid min-h-screen lg:grid-cols-2">
+
+  <!-- Panel de marca -->
+  <section class="relative hidden flex-col justify-between overflow-hidden bg-gradient-to-br from-ink via-ink-soft to-black p-12 text-white lg:flex">
+    <div class="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-sony/20 blur-3xl" aria-hidden="true"></div>
+    <p class="text-3xl font-extrabold tracking-[0.3em] text-sony">SONY</p>
+    <div class="relative max-w-md">
+      <h1 class="text-4xl font-bold leading-tight">Soporte técnico<br>claro y a tu ritmo.</h1>
+      <p class="mt-4 text-slate-300">Registra tu equipo, sigue cada etapa de la reparación y conversa con tu técnico desde un solo lugar.</p>
+      <ul class="mt-8 space-y-3 text-sm text-slate-300">
+        <li class="flex items-center gap-3"><span class="grid h-6 w-6 place-items-center rounded-full bg-sony text-xs font-bold">1</span> Registra la falla con tu boleta</li>
+        <li class="flex items-center gap-3"><span class="grid h-6 w-6 place-items-center rounded-full bg-sony text-xs font-bold">2</span> Recibe diagnóstico y presupuesto</li>
+        <li class="flex items-center gap-3"><span class="grid h-6 w-6 place-items-center rounded-full bg-sony text-xs font-bold">3</span> Aprueba y sigue la reparación</li>
+      </ul>
+    </div>
+    <p class="relative text-xs text-slate-500">Proyecto académico UTP · Sistema de soporte técnico</p>
+  </section>
+
+  <!-- Formularios -->
+  <section class="flex items-center justify-center px-5 py-10 sm:px-10">
+    <div class="w-full max-w-md">
+      <p class="mb-8 text-center text-3xl font-extrabold tracking-[0.3em] text-sony lg:hidden">SONY</p>
+
+      <div class="rounded-2xl border border-white/10 bg-ink-soft p-6 shadow-2xl sm:p-8">
+        <div class="mb-6 grid grid-cols-2 rounded-lg bg-black/40 p-1 text-sm font-semibold" role="tablist">
+          <button id="tabLogin" role="tab" aria-selected="true" class="rounded-md py-2 transition">Iniciar sesión</button>
+          <button id="tabRegistro" role="tab" aria-selected="false" class="rounded-md py-2 transition">Crear cuenta</button>
+        </div>
+
+        <p id="mensaje" class="mb-4 hidden rounded-lg bg-red-500/10 px-3 py-2 text-sm text-red-300" role="alert"></p>
+
+        <form id="loginForm" class="space-y-4" novalidate>
+          <div>
+            <label for="correo" class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-400">Correo electrónico</label>
+            <input id="correo" type="email" autocomplete="username" required maxlength="150" class="input-dark" placeholder="tucorreo@ejemplo.com">
+          </div>
+          <div>
+            <label for="password" class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-400">Contraseña</label>
+            <input id="password" type="password" autocomplete="current-password" required maxlength="72" class="input-dark" placeholder="••••••••">
+          </div>
+          <button type="submit" class="btn-primary w-full py-2.5">Ingresar</button>
+        </form>
+
+        <form id="registerForm" class="hidden space-y-4" novalidate>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label for="regNombres" class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-400">Nombres</label>
+              <input id="regNombres" type="text" autocomplete="given-name" required minlength="2" maxlength="80" class="input-dark" placeholder="Juan">
+            </div>
+            <div>
+              <label for="regApellidos" class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-400">Apellidos</label>
+              <input id="regApellidos" type="text" autocomplete="family-name" required minlength="2" maxlength="80" class="input-dark" placeholder="Pérez">
+            </div>
+          </div>
+          <div>
+            <label for="regCorreo" class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-400">Correo electrónico</label>
+            <input id="regCorreo" type="email" autocomplete="email" required maxlength="150" class="input-dark" placeholder="tucorreo@ejemplo.com">
+          </div>
+          <div>
+            <label for="regPassword" class="mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-400">Contraseña</label>
+            <input id="regPassword" type="password" autocomplete="new-password" required minlength="8" maxlength="72" class="input-dark" placeholder="Mínimo 8 caracteres">
+            <ul class="mt-2 space-y-1 text-xs text-slate-500" id="reglasPassword" aria-live="polite">
+              <li data-regla="largo">• Al menos 8 caracteres</li>
+              <li data-regla="letra">• Incluye una letra</li>
+              <li data-regla="numero">• Incluye un número</li>
+            </ul>
+          </div>
+          <button type="submit" class="btn-success w-full py-2.5">Crear mi cuenta</button>
+        </form>
+
+        <div id="demo" class="mt-6 hidden rounded-lg bg-black/30 p-3 text-xs text-slate-400">
+          <p class="mb-2 font-semibold text-slate-300">Cuentas de prueba (modo demostración)</p>
+          <ul id="demoLista" class="space-y-1"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="/js/common.js"></script>
+<script src="/js/auth.js"></script>
+</body>
+</html>

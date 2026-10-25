@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Tema claro (por defecto en CSS) y oscuro (data-tema="oscuro") ---------- */
+:root {
+  color-scheme: light;
+  --canvas: 241 245 249; --surface: 255 255 255; --surface-2: 255 255 255;
+  --line: 226 232 240; --line-strong: 203 213 225; --sony-soft: 253 236 239;
+  --s50: 248 250 252; --s100: 241 245 249; --s200: 226 232 240; --s300: 203 213 225; --s400: 148 163 184;
+  --s500: 100 116 139; --s600: 71 85 105; --s700: 51 65 85; --s800: 30 41 59; --s900: 15 23 42;
+  --sky50: 240 249 255; --sky100: 224 242 254; --sky800: 7 89 133; --sky900: 12 74 110; --sky950: 8 47 73;
+  --amber50: 255 251 235; --amber100: 254 243 199; --amber800: 146 64 14; --amber900: 120 53 15;
+  --emerald50: 236 253 245; --emerald100: 209 250 229; --emerald800: 6 95 70; --emerald900: 6 78 59;
+  --red50: 254 242 242; --red100: 254 226 226; --red800: 153 27 27; --red900: 127 29 29;
+  --violet100: 237 233 254; --violet800: 91 33 182;
+}
+:root[data-tema='oscuro'] {
+  color-scheme: dark;
+  --canvas: 17 24 39; --surface: 31 41 55; --surface-2: 55 65 81;
+  --line: 55 65 81; --line-strong: 75 85 99; --sony-soft: 59 18 25;
+  --s50: 17 24 39; --s100: 55 65 81; --s200: 75 85 99; --s300: 209 213 219; --s400: 156 163 175;
+  --s500: 156 163 175; --s600: 209 213 219; --s700: 229 231 235; --s800: 243 244 246; --s900: 255 255 255;
+  --sky50: 12 42 61; --sky100: 12 58 87; --sky800: 186 230 253; --sky900: 224 242 254; --sky950: 224 242 254;
+  --amber50: 58 42 7; --amber100: 74 53 8; --amber800: 253 230 138; --amber900: 254 243 199;
+  --emerald50: 6 46 34; --emerald100: 6 78 59; --emerald800: 167 243 208; --emerald900: 209 250 229;
+  --red50: 59 18 25; --red100: 76 21 25; --red800: 254 202 202; --red900: 254 226 226;
+  --violet100: 59 31 107; --violet800: 221 214 254;
+}
+
+@layer base {
+  html { @apply antialiased; }
+  body { @apply bg-canvas text-slate-800 font-sans; }
+  :focus-visible { @apply outline-none ring-2 ring-sony/60 ring-offset-1 ring-offset-canvas; }
+  textarea { @apply resize-y; }
+}
+
+@layer components {
+  /* ---------- Botones ---------- */
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold transition
+  disabled:cursor-not-allowed disabled:opacity-60; }
+  .btn-primary { @apply btn bg-sony text-white hover:bg-sony-dark; }
+  .btn-dark    { @apply btn bg-ink text-white ring-1 ring-inset ring-white/10 hover:bg-ink-soft; }
+  .btn-success { @apply btn bg-green-600 text-white hover:bg-green-700; }
+  .btn-warn    { @apply btn bg-amber-500 text-white hover:bg-amber-600; }
+  .btn-info    { @apply btn bg-blue-600 text-white hover:bg-blue-700; }
+  .btn-ghost   { @apply btn bg-surface-2 text-slate-700 ring-1 ring-inset ring-line-strong hover:bg-slate-100; }
+  .btn-danger-ghost { @apply btn bg-surface-2 text-sony ring-1 ring-inset ring-sony/30 hover:bg-sony-soft; }
+  .btn-sm { @apply px-3 py-1.5 text-xs; }
+
+  /* ---------- Formularios ---------- */
+  .field-label { @apply mb-1 block text-xs font-semibold uppercase tracking-wide text-slate-600; }
+  .field-hint  { @apply mt-1 text-xs text-slate-500; }
+  .input { @apply block w-full rounded-lg border border-line-strong bg-surface-2 px-3 py-2 text-sm text-slate-900
+  placeholder:text-slate-400 focus:border-sony focus:outline-none focus:ring-2 focus:ring-sony/30; }
+  .input-dark { @apply block w-full rounded-lg border border-white/15 bg-white/5 px-3 py-2.5 text-sm text-white
+  placeholder:text-gray-500 focus:border-sony focus:outline-none focus:ring-2 focus:ring-sony/40; }
+
+  /* ---------- Contenedores ---------- */
+  .card { @apply rounded-2xl border border-line bg-surface shadow-sm; }
+  .card-pad { @apply card p-5 sm:p-6; }
+  .topbar { @apply sticky top-0 z-30 border-b-2 border-sony bg-black text-white; }
+  .page { @apply mx-auto grid max-w-7xl grid-cols-1 gap-6 px-4 py-6 sm:px-6 lg:grid-cols-3 lg:gap-8 lg:py-8; }
+  .section-title { @apply text-base font-bold text-slate-900; }
+  .section-sub { @apply mt-0.5 text-sm text-slate-500; }
+
+  /* ---------- Orden: filtros y categorías ---------- */
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-semibold text-slate-600
+  ring-1 ring-inset ring-line-strong transition hover:bg-slate-100; }
+  .chip .n { @apply rounded-full bg-slate-100 px-1.5 text-[10px] text-slate-600; }
+  .chip[aria-pressed='true'] { @apply bg-sony text-white ring-sony hover:bg-sony-dark; }
+  .chip[aria-pressed='true'] .n { @apply bg-white/25 text-white; }
+  .cat-titulo { @apply flex items-center gap-2 border-b border-line pb-2 text-sm font-bold uppercase tracking-wide text-slate-700; }
+
+  /* ---------- Barra superior ---------- */
+  .tema-btn { @apply inline-flex items-center gap-1 rounded-lg bg-white/10 px-3 py-1.5 text-xs font-semibold text-white hover:bg-white/20; }
+  .panel-flotante { @apply absolute right-0 top-full z-40 mt-2 max-h-96 w-80 max-w-[90vw] space-y-1 overflow-y-auto rounded-xl border border-line bg-surface p-2 shadow-2xl; }
+
+  /* ---------- Insignias ---------- */
+  .badge { @apply inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-semibold; }
+  .badge-gray   { @apply badge bg-slate-100 text-slate-700; }
+  .badge-blue   { @apply badge bg-sky-100 text-sky-800; }
+  .badge-amber  { @apply badge bg-amber-100 text-amber-800; }
+  .badge-violet { @apply badge bg-violet-100 text-violet-800; }
+  .badge-green  { @apply badge bg-emerald-100 text-emerald-800; }
+  .badge-red    { @apply badge bg-red-100 text-red-800; }
+
+  /* ---------- Avisos ---------- */
+  .notice { @apply rounded-lg border-l-4 p-3 text-sm; }
+  .notice-warn { @apply notice border-amber-500 bg-amber-50 text-amber-900; }
+  .notice-info { @apply notice border-sky-500 bg-sky-50 text-sky-900; }
+  .notice-ok   { @apply notice border-emerald-500 bg-emerald-50 text-emerald-900; }
+  .notice-bad  { @apply notice border-red-500 bg-red-50 text-red-900; }
+
+  /* ---------- Progreso por pasos ---------- */
+  .steps { @apply grid grid-cols-4 gap-1 text-center text-[11px] font-medium text-slate-400; }
+  .steps > div::before { content: ''; @apply mb-1.5 block h-1.5 rounded-full bg-slate-200; }
+  .steps > .done { @apply text-slate-700; }
+  .steps > .done::before { @apply bg-sony; }
+  .steps > .stopped::before { @apply bg-slate-400; }
+
+  .tabla th { @apply bg-slate-50 px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-slate-500; }
+  .tabla td { @apply px-4 py-3 align-top; }
+  .skeleton { @apply animate-pulse rounded-lg bg-slate-200; }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "Sony Soporte Técnico",
+  "short_name": "Sony Soporte",
+  "start_url": "/",
+  "display": "standalone",
+  "lang": "es",
+  "background_color": "#111318",
+  "theme_color": "#111318",
+  "icons": [{ "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any" }]
+}

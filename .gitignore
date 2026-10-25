@@ -21,3 +21,6 @@ Desktop.ini
 *.pem
 *.key
 secrets/
+
+.idea/
+nbproject/
